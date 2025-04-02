@@ -2,6 +2,7 @@
 id:1
 name:"getting-start-with-revit-api"
 title: "Getting Started with Autodesk Revit API"
+preview:"In this post you will get a brief introduction on how to use the Revit API"
 date: "2025-04-02"
 tags: ["Revit", "API", "C#", "BIM"]
 ---
