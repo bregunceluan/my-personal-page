@@ -57,7 +57,7 @@ public class CreateWall : IExternalCommand
 
 Below is an example of what a wall creation script might result in:
 
-![Revit Wall Example](https://help.autodesk.com/cloudhelp/2025/ENU/Revit-ArchDesign/images/GUID-FC8FD74A-0BE8-4CE0-93C9-D285D4A43C9F.png)
+![Revit Wall Example](/articles/getting-start-with-revit-api/wall.png)
 
 ## Further Resources
 
