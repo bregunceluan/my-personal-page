@@ -18,26 +18,24 @@
 
 <script setup lang="ts">
 
-import { eventBus } from '@/models/events';
 import { GlobalStateValues, Language } from '@/store/globalState';
-import { inject, onMounted, ref } from 'vue';
-
-
-const state = inject<GlobalStateValues>('globalState')
+import { inject, onBeforeMount, ref, watch } from 'vue';
 
 
 
 const props = defineProps(['item'])
 const post = props.item;
+const description = ref<string>("");
+const state = inject<GlobalStateValues>('globalState')
 
-const description = ref(state?.language === Language.PT ? post.descriptionPT : post.descriptionENG);
+onBeforeMount(() =>{
+    description.value = state?.language === Language.PT ? post.descriptionPT : post.descriptionENG;
+})
 
-onMounted(
-    () => {
-    eventBus.on('languageChanged', (lang:Language) => {
-        description.value = lang === Language.PT ? post.descriptionPT : post.descriptionENG;});
-    }
-)
+watch(state!,(value) =>{
+    description.value = value?.language === Language.PT ? post.descriptionPT : post.descriptionENG;
+})
+
     
     
 </script>

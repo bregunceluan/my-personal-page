@@ -25,10 +25,28 @@
             </ul>
             
             <div style="display: flex; justify-content: space-between; gap: 20px;">
-                <v-btn variant="flat" class="btn-Github" icon="mdi-github" @click="(a:any) => a.view?.window.open('https://github.com/bregunceluan')"></v-btn>
-                <v-switch :true-value="Language.ENG" :false-value="Language.PT" flat v-on:update:model-value="(a:any) => valueChange(a)"
-                    density="compact" style="padding-top: 10px; color: white;" :label="language">
-                </v-switch>
+                <v-btn
+                    icon
+                    variant="text"
+                    class="github-btn"
+                    @click="(a:any) => a.view?.window.open('https://github.com/bregunceluan')">
+                    <v-icon>mdi-github</v-icon>
+                </v-btn>
+                <div class="language-switch">
+                    <v-switch 
+                        :false-value="Language.ENG" 
+                        :true-value="Language.PT" 
+                        flat 
+                        v-on:update:model-value="(a:any) => valueChange(a)"
+                        density="compact" 
+                        style="padding-top: 10px; color: white;">
+                    </v-switch>
+                    <img 
+                        :src="state?.language === Language.ENG ? usFlag : brFlag" 
+                        :alt="state?.language === Language.ENG ? 'US Flag' : 'BR Flag'"
+                        class="flag"
+                    />
+                </div>
             </div>
             
         </nav>
@@ -38,18 +56,24 @@
 <script setup lang="ts">
 
 import { useRoute } from 'vue-router';
-import { Language } from '../store/globalState';
-import { ref } from 'vue';
+import { GlobalStateValues, Language } from '../store/globalState';
+import { inject, onBeforeMount, ref } from 'vue';
 import { availableRoutesBR,availableRoutesENG } from '@/router';
-import { eventBus } from '@/models/events';
+import brFlag from '@/assets/br.png?url';
+import usFlag from '@/assets/us.png?url';
 
-const rotas = ref(availableRoutesBR);
+const rotas = ref(availableRoutesENG);
 const language = ref(Language.ENG ? "ENG" : "PT");
+const state = inject<GlobalStateValues>('globalState')
+
+onBeforeMount(() =>{
+    state!.language = Language.ENG;
+})
 
 function valueChange(val : Language){
-    eventBus.emit('languageChanged', val);
     rotas.value = val === Language.PT ? availableRoutesBR : availableRoutesENG;
     language.value = val === Language.ENG ? "ENG" : "PT";
+    state!.language = val;
 }
 
 
@@ -110,18 +134,15 @@ header{
         
     }
     
-    .btn-Github{
-        border-radius: 24px;
-        padding: 10px 22px;
-        cursor: pointer;
-        background-color: #ffffff;
-        border: none;
-        transition: all 0.3s;
-        margin-top: 5px;        
-        &:hover{
-            background-color: #e3e2e2;
-        }
+    .github-btn {
+        color: #e3e2e2;
+        transition: all 0.3s ease;
+        margin-top: 5px;
         
+        &:hover {
+            color: rgb(252, 255, 71);
+            transform: translateY(-2px);
+        }
     }
     
     
@@ -154,6 +175,20 @@ header{
         align-self: center;
         justify-self: center;
     }
+}
+
+.language-switch {
+    display: flex;
+    align-items:center;
+    gap: 8px;
+}
+
+.flag {
+    width: 24px;
+    height: 24px;
+    object-fit: cover;
+    border-radius: 4px;
+    margin-left: 4px;
 }
 
 </style>

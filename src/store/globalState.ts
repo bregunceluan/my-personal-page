@@ -1,3 +1,4 @@
+import { BlogPostData } from "@/models/entity";
 import { reactive } from "vue";
 
 export enum Language{
@@ -7,10 +8,10 @@ export enum Language{
 
 export interface GlobalStateValues{
     language:Language,
-    myVariable: string
+    blogPosts:BlogPostData[]
 }
 
 export const globalState = reactive<GlobalStateValues>({
     language:Language.PT,
-    myVariable: 'initialValue'
+    blogPosts:[]
 })

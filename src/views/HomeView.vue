@@ -49,8 +49,8 @@ const type = () => {
     
     <div class="container">
         <div class="mainContent">
-            <h1>Luan</h1>
-            <h2>Bregunce</h2>
+            <h1>Developer</h1>
+            <h2>Civil Engineer</h2>
             <div class="typing-effect">{{ displayedText }}</div>
         </div>
         
@@ -121,7 +121,7 @@ h1:hover,h2:hover{
 
 @media (width <= 600px) {
     h1,h2{
-        font-size: 3em;
+        font-size: 2em;
     }
 
     .typing-effect{
