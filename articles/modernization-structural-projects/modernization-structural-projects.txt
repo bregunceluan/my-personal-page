@@ -7,6 +7,8 @@ date: "2025-04-02"
 tags: ["Structural Engineering", "BIM", "Revit", "Etabs", ".NET",".NET Framework,]
 ---
 
+![Integration](/articles/modernization-structural-projects/integration.png)
+
 # Modernization of Structural Project Processes
 
 The creation of a structural project requires great care. The process involves the sizing, detailing, and verification of all structural elements, such as beams, columns, slabs, foundations, and others. The structural engineer must design a project based on regulations and standards, ensuring it withstands all load incidences, provides structural stability, and offers thermal, acoustic, and other comforts for its users.
