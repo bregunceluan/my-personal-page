@@ -1,6 +1,6 @@
 import { GitHubFile } from "./entity";
 
-const branchTarget = 'development'
+const branchTarget = 'main'
 const baseArticlesFolder = `https://api.github.com/repos/bregunceluan/my-personal-page/contents/articles`
 const baseContent = `https://raw.githubusercontent.com/bregunceluan/my-personal-page/${branchTarget}/articles`
 
