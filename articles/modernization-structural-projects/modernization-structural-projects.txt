@@ -1,0 +1,49 @@
+---
+id: 1
+name: "modernization-structural-projects"
+title: "Modernization of Structural Project Processes"
+preview: "In this article, I explain how I participated in a project that revolutionized the entire building design process."
+date: "2025-04-02"
+tags: ["Structural Engineering", "BIM", "Revit", "Etabs", ".NET",".NET Framework,]
+---
+
+# Modernization of Structural Project Processes
+
+The creation of a structural project requires great care. The process involves the sizing, detailing, and verification of all structural elements, such as beams, columns, slabs, foundations, and others. The structural engineer must design a project based on regulations and standards, ensuring it withstands all load incidences, provides structural stability, and offers thermal, acoustic, and other comforts for its users.
+
+The civil construction sector, traditionally marked by manual and repetitive processes, increasingly seeks innovation to optimize projects and ensure the quality of constructions. In this article, I explain how I participated in a project that revolutionized the entire building design process, from software selection challenges to technological choices and more.
+
+With the growing demand for structural masonry projects and the expansion of engineering teams, modernizing the structural masonry process became necessary. Previously, the process was based on a spreadsheet. The spreadsheet was the foundation of the process, and through Python scripts, it was integrated with two engineering software programs: TQS and SAP2000 from CSI America. Although efficient and important at that time, there were still areas for improvement, such as the difficulty in dealing with buildings with multiple typologies.
+
+## Modeling Software
+
+Since integration would be the foundation of the entire new process, it was ideal that the software chosen for the design process had an easy way to access its functions programmatically via an API, which Autodesk Revit made possible.
+
+Revit is widely used worldwide due to its ability to create robust 3D projects, whether architectural, electrical, or hydraulic. With Revit, it is possible to create a process that truly implements the BIM methodology, where a building model is not just a digital representation of a building but also a container of information.
+
+However, not everything is perfect. This choice introduced a limitation: at that time, Revit's API only supported the .NET Framework runtime, an already obsolete version at the time. Its adoption would entail some "losses."
+
+## .NET Framework vs .NET Core
+
+In simple terms, the "runtime" is the environment in which a program runs, managing the resources needed for code execution on a given computer.
+
+The .NET Framework was the first runtime created by Microsoft in 2002 and was only available for Windows. Although still supported by Microsoft and receiving security updates, developers are discouraged from using this tool. However, in some cases, its use is unavoidable, as in this case.
+
+.NET Core was created by Microsoft with one of its main characteristics being cross-platform compatibility, allowing it to run on Windows, Linux, macOS, and others. Today, it is Microsoft's primary focus for its programming ecosystem. It receives constant updates, has a dedicated team of engineers focused on its continuous improvement, and has an engaged community. These factors together ensure a constantly evolving language.
+
+Using only the .NET Framework would indeed be a loss. However, the problem of having two different runtimes in the same codebase was also a challenge faced by the market, which led Microsoft to create .NET Standard.
+
+This new "tool" is not necessarily a runtime but enabled greater uniformity in the .NET ecosystem, allowing .NET Framework and .NET Core to coexist within the same codebase.
+
+## Unit Testing
+
+The accuracy and reliability of calculations in building design are crucial. Errors can result in severe problems, whether in structural costs or more serious structural issues. When developing software, it is essential that its behavior remains consistent throughout its lifecycle. For this, unit tests are applied. With them, each small part of the code is tested separately. For example, in a design software, these calculations range from concrete strength calculations to the final reinforcement of structural elements.
+
+For these tests, support spreadsheets were created to compare results with those provided by the software. Each design equation was first developed on paper and then transferred to code and spreadsheets.
+
+## Conclusion
+
+The development of an integrated solution for building design represented a significant advancement in structural masonry projects. By facing and overcoming the mentioned technological challenges, it was possible to create a solution that not only met the current demands of the sector but also established a solid foundation for future innovations. The implemented solutions allowed engineers and interns to access a tool that enabled testing various structural solutions with different element arrangements and concise results. All this was implemented in an intuitive interface, further enhancing agility and reliability in comparing results and providing a detailed view of each structural element's outcome.
+
+The successful integration of different technologies, the implementation of precise calculations, and the creation of a robust testing system demonstrate the potential of technology to revolutionize traditional engineering processes. This was not just a tool created but an example of how technological innovation can drive efficiency and quality in highly specialized fields.
+
