@@ -49,3 +49,34 @@ export const getBlogPostText = async (postName:string) =>{
     }
     
 }
+
+export const log = () => {
+    const info = {
+      userAgent: navigator.userAgent,
+      language: navigator.language,
+      platform: navigator.platform,
+      screen: {
+        width: screen.width,
+        height: screen.height,
+        colorDepth: screen.colorDepth,
+        pixelDepth: screen.pixelDepth,
+        availWidth: screen.availWidth,
+        availHeight: screen.availHeight,
+      },
+      timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+      cookiesEnabled: navigator.cookieEnabled,
+      doNotTrack: navigator.doNotTrack,
+      hardwareConcurrency: navigator.hardwareConcurrency || null,
+      referrer: document.referrer,
+      locationHref: window.location.href
+    };
+
+    fetch("https://ntfy.luanelso.online/personal-site",{
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(info),
+    })
+
+}
