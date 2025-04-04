@@ -20,7 +20,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, inject } from 'vue';
+import { ref, onMounted, inject, onBeforeMount } from 'vue';
 import { useRoute } from 'vue-router';
 import BlogPost from '@/components/BlogPost.vue';
 import { BlogPostData } from '@/models/entity';
@@ -58,16 +58,14 @@ async function fetchPost(postName: string) {
 
 
 
-onMounted(async () => {
-  debugger
+onBeforeMount(async () => {
+  
   const postId = route.params.postName as string;
   
-  // First try to find the post in the global state
   if (state?.blogPosts) {
     post.value = state.blogPosts.find(p => p.name === postId) || null;
   }
   
-  // If not found in state, fetch it
   if (!post.value) {
     await fetchPost(postId);
   } else {
