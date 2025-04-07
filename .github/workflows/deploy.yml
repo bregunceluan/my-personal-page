@@ -35,3 +35,4 @@ jobs:
             sudo rm -rf /root/www/devluan/*
           fi
           sudo cp -r dist/* /root/www/devluan/
+
