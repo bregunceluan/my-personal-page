@@ -30,9 +30,5 @@ jobs:
       # Step 5: Deploy to local to nginx
       - name: Deploy to /root/www/devluan
         run: |
-          sudo mkdir -p /root/www/devluan
-          if [ -d "/root/www/devluan" ]; then
-            sudo rm -rf /root/www/devluan/*
-          fi
           sudo cp -r dist/* /root/www/devluan/
 
