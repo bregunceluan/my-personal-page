@@ -7,7 +7,7 @@ date: "2025-04-02"
 tags: ["Structural Engineering", "BIM", "Revit", "Etabs", ".NET",".NET Framework"]
 ---
 
-![Integration](./articles/modernization-structural-projects/integration.jpg)
+![Integration](https://raw.githubusercontent.com/bregunceluan/my-personal-page/refs/heads/main/articles/modernization-structural-projects/integration.jpg)
 
 # Modernization of Structural Project Processes
 
