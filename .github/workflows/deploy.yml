@@ -28,7 +28,6 @@ jobs:
         run: npm run build
 
       # Step 5: Deploy to local to nginx
-      - name: Deploy to /root/www/devluan
+      - name: Deploy to /var/www/devluan
         run: |
-          sudo cp -r dist/* /root/www/devluan/
-
+          sudo cp -r dist/* /var/www/devluan
