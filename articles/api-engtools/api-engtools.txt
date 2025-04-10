@@ -10,6 +10,8 @@ tags: ["Structural Engineering", "Design", "Revit", "API"]
 
 # Criando uma API para Engenharia Civil
 
+[Acesse aqui a EngTools API](https://engtools-api.devluan.com/)
+
 Se você é da área da engenharia civil, talvez já tenha ouvido falar sobre APIs (*Application Programming Interfaces*). Elas funcionam como um canal de comunicação entre diferentes sistemas, permitindo que dados e funcionalidades sejam compartilhados de forma padronizada, segura e eficiente. As APIs estão por trás de praticamente tudo o que usamos na internet — de aplicativos bancários a plataformas de transporte urbano — automatizando tarefas e integrando serviços.
 
 Na engenharia civil, ainda são raras as APIs públicas que atendam diretamente às necessidades dos engenheiros ou programadores da área. Em geral, o que se vê são planilhas e sistemas próprios desenvolvidos para tarefas específicas. No entanto, a reutilização desses recursos acaba se tornando limitada, especialmente por não aproveitarem as vantagens que uma API pode oferecer, como, por exemplo, a integração com outras ferramentas.
