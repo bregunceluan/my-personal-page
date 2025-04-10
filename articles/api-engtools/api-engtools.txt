@@ -1,3 +1,13 @@
+---
+id: 2
+name: "api-engtools"
+title: "An API to Civil Engineers"
+preview: "In this article, I share how I'm developing a public API to bring automation and integration to structural calculations in civil engineering."
+date: "2025-04-10"
+tags: ["Structural Engineering", "Design", "Revit", "API"]
+---
+
+
 # Criando uma API para Engenharia Civil
 
 Se você é da área da engenharia civil, talvez já tenha ouvido falar sobre APIs (*Application Programming Interfaces*). Elas funcionam como um canal de comunicação entre diferentes sistemas, permitindo que dados e funcionalidades sejam compartilhados de forma padronizada, segura e eficiente. As APIs estão por trás de praticamente tudo o que usamos na internet — de aplicativos bancários a plataformas de transporte urbano — automatizando tarefas e integrando serviços.
