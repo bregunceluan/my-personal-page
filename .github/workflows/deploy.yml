@@ -1,4 +1,4 @@
-name: Deploy to AWS S3
+name: Deploy
 
 on:
   push:
@@ -9,25 +9,20 @@ jobs:
   build-and-deploy:
     runs-on: self-hosted
     steps:
-      # Step 1: Checkout the code
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Step 2: Set up Node.js
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16' # Specify your Node.js version
+          node-version: '16'
 
-      # Step 3: Install dependencies
       - name: Install dependencies
         run: npm install
 
-      # Step 4: Build the project
       - name: Build project
         run: npm run build
 
-      # Step 5: Deploy to local to nginx
       - name: Deploy to /var/www/devluan
         run: |
-          sudo cp -r dist/* /var/www/devluan
+          cp -r dist/* /opt/devluan
