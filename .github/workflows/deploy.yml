@@ -25,4 +25,4 @@ jobs:
 
       - name: Deploy to /var/www/devluan
         run: |
-          cp -r dist/* /opt/devluan
+          cp -r dist/* /opt/devluan/www
