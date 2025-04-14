@@ -1,0 +1,41 @@
+---
+id: 2
+name: "engcalc-api"
+title: "Uma api para engenheiro civis"
+preview: "Neste artigo, compartilho como estou desenvolvendo uma API pública para trazer automação e integração aos cálculos estruturais na engenharia civil."
+date: "2025-04-10"
+tags: ["Engenharia Estrutural", "Dimensionamento", "API"]
+---
+
+
+# Criando uma API para Engenharia Civil
+
+[Acesse aqui a EngCalc API](https://engcalc-api.devluan.com/)
+
+Se você é da área da engenharia civil, talvez já tenha ouvido falar sobre APIs (*Application Programming Interfaces*). Elas funcionam como um canal de comunicação entre diferentes sistemas, permitindo que dados e funcionalidades sejam compartilhados de forma padronizada, segura e eficiente. As APIs estão por trás de praticamente tudo o que usamos na internet — de aplicativos bancários a plataformas de transporte urbano — automatizando tarefas e integrando serviços.
+
+Na engenharia civil, ainda são raras as APIs públicas que atendam diretamente às necessidades dos engenheiros ou programadores da área. Em geral, o que se vê são planilhas e sistemas próprios desenvolvidos para tarefas específicas. No entanto, a reutilização desses recursos acaba se tornando limitada, especialmente por não aproveitarem as vantagens que uma API pode oferecer, como, por exemplo, a integração com outras ferramentas.
+
+Pensando nisso, comecei a desenvolver uma API com diversas funcionalidades voltadas à engenharia civil. O objetivo inicial foi apoiar meus próprios estudos e aplicações, mas, com o tempo, decidi torná-la pública para que outros engenheiros também possam utilizá-la em seus projetos e ferramentas.
+
+## O Objetivo da API
+
+A proposta central é disponibilizar uma API que ofereça funcionalidades práticas para cálculos estruturais, com foco inicial no dimensionamento de vigas submetidas a esforços de cortante, flexão e torção.
+
+Esses tipos de cálculo são essenciais tanto em contextos acadêmicos quanto na prática profissional. A API permite integrá-los facilmente em sistemas de cálculo, planilhas automatizadas, aplicativos móveis ou qualquer outro tipo de solução digital voltada à engenharia.
+
+## Exemplo de Aplicação
+
+Um exemplo prático de uso é a criação de uma planilha de dimensionamento em que o engenheiro precisa apenas se preocupar com a interface de entrada e saída de dados. Por meio de uma simples requisição HTTP, os dados inseridos na planilha são enviados para a API, que os processa e retorna os resultados de forma imediata para exibição.
+
+> ![FOTO/IMAGEM DO GIF DA PLANILHA](https://raw.githubusercontent.com/bregunceluan/my-personal-page/refs/heads/main/articles/engcalc-api/plan.gif)
+
+Ou caso prefira, é possível utilizar também o PostMan para testar a api.
+> ![FOTO/IMAGEM DO GIF DA POSTMAN](https://raw.githubusercontent.com/bregunceluan/my-personal-page/refs/heads/main/articles/engcalc-api/postman.jpg)
+
+
+## Testando a API
+
+Para facilitar ainda mais o uso, desenvolvi uma ferramenta integrada chamada **API Tester**, que permite testar os *endpoints* diretamente pela plataforma, sem a necessidade de implementar código previamente.
+
+A interface é simples e intuitiva, e a própria plataforma fornece a documentação completa, explicando como utilizar cada rota disponível. Assim, mesmo quem está começando com requisições HTTP pode começar a explorar a API em poucos minutos.
