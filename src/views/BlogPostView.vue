@@ -39,6 +39,7 @@ async function fetchPost(postName: string) {
     loading.value = true;
     error.value = '';
     
+    debugger
     const getPostText = await getBlogPostText(postName);
 
     const parsed = parseHeaderAndContent(getPostText);
@@ -59,6 +60,8 @@ async function fetchPost(postName: string) {
 
 
 onBeforeMount(async () => {
+
+  debugger
   
   const postId = route.params.postName as string;
   

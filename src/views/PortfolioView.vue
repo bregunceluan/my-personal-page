@@ -14,11 +14,11 @@ const noPostsMessage = document.getElementById('noPostsMessage');
 
 const portfolioPosts = [
 { 
-    title: "EngTools",
-    link:"https://engtools-api.devluan.com/",
-    descriptionPT: "Esta calculadora foi desenvolvida para auxiliar engenheiros civis no dimensionamento de vigas submetidas a flexão, esforço cortante e torção. Ela oferece uma interface intuitiva que exibe detalhadamente todas as propriedades da viga e do aço, garantindo precisão e facilidade no cálculo.",
-    descriptionENG: "This calculator is designed to assist civil engineers in sizing beams subjected to bending, shear, and torsion. It provides an intuitive interface that thoroughly details all the properties of the beam and the steel, ensuring accuracy and ease of calculation.",
-    tecnologies:["C#","Vue.Js"] 
+    title: "EngCalc",
+    link:"https://engcalc-api.devluan.com/",
+    descriptionPT: "A API do EngTools foi desenvolvida para apoiar engenheiros civis na automação de cálculos estruturais, como o dimensionamento de vigas submetidas a flexão, esforço cortante e torção.",
+    descriptionENG: "TThe EngTools API was developed to support civil engineers in automating structural calculations, such as the design of beams subjected to bending, shear, and torsion.",
+    tecnologies:["C#","Vue.Js", "Rest API"] 
 },
 ];
 

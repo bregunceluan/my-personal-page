@@ -10,6 +10,7 @@ const state = inject<GlobalStateValues>('globalState')
 const blogPosts = ref<BlogPostData[]>([])
 
 onBeforeMount(async () => {
+    debugger
     const dirPosts = await getBlogPostFolders();
     
     if(dirPosts){      
