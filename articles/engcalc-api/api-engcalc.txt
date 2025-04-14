@@ -28,10 +28,10 @@ Esses tipos de cálculo são essenciais tanto em contextos acadêmicos quanto na
 
 Um exemplo prático de uso é a criação de uma planilha de dimensionamento em que o engenheiro precisa apenas se preocupar com a interface de entrada e saída de dados. Por meio de uma simples requisição HTTP, os dados inseridos na planilha são enviados para a API, que os processa e retorna os resultados de forma imediata para exibição.
 
-> ![FOTO/IMAGEM DO GIF DA PLANILHA](https://raw.githubusercontent.com/bregunceluan/my-personal-page/refs/heads/main/articles/api-engtools/plan.gif)
+> ![FOTO/IMAGEM DO GIF DA PLANILHA](https://raw.githubusercontent.com/bregunceluan/my-personal-page/refs/heads/main/articles/engcalc-api/plan.gif)
 
 Ou caso prefira, é possível utilizar também o PostMan para testar a api.
-> ![FOTO/IMAGEM DO GIF DA POSTMAN](https://raw.githubusercontent.com/bregunceluan/my-personal-page/refs/heads/main/articles/api-engtools/postman.jpg)
+> ![FOTO/IMAGEM DO GIF DA POSTMAN](https://raw.githubusercontent.com/bregunceluan/my-personal-page/refs/heads/main/articles/engcalc-api/postman.jpg)
 
 
 ## Testando a API
