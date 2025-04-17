@@ -195,7 +195,8 @@ header{
     height: 24px;
     object-fit: cover;
     border-radius: 4px;
-    margin-left: 4px;
+    margin-left: 10px;
+    margin-bottom:  10px;
 }
 
 </style>
