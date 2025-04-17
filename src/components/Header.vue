@@ -32,6 +32,13 @@
                     @click="(a:any) => a.view?.window.open('https://github.com/bregunceluan')">
                     <v-icon>mdi-github</v-icon>
                 </v-btn>
+                <v-btn
+                    icon
+                    variant="text"
+                    class="github-btn"
+                    @click="(a:any) => a.view?.window.open('https://www.linkedin.com/in/luanbregunce/')">
+                    <v-icon>mdi-linkedin</v-icon>
+                </v-btn>
                 <div class="language-switch">
                     <v-switch 
                         :false-value="Language.ENG" 

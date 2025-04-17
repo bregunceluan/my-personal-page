@@ -16,8 +16,8 @@ const portfolioPosts = [
 { 
     title: "EngCalc",
     link:"https://engcalc-api.devluan.com/",
-    descriptionPT: "A API do EngTools foi desenvolvida para apoiar engenheiros civis na automação de cálculos estruturais, como o dimensionamento de vigas submetidas a flexão, esforço cortante e torção.",
-    descriptionENG: "The EngTools API was developed to support civil engineers in automating structural calculations, such as the design of beams subjected to bending, shear, and torsion.",
+    descriptionPT: "A API do EngCalc foi desenvolvida para apoiar engenheiros civis na automação de cálculos estruturais, como o dimensionamento de vigas submetidas a flexão, esforço cortante e torção.",
+    descriptionENG: "The EngCalc API was developed to support civil engineers in automating structural calculations, such as the design of beams subjected to bending, shear, and torsion.",
     tecnologies:["C#","Vue.Js", "Rest API"] 
 },
 ];

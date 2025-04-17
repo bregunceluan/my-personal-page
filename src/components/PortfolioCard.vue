@@ -2,7 +2,7 @@
     
     <div class="container" @click="(a) => a.view?.window.open(post.link)">
         
-        <img width="30%" height="80%" src="../assets/engtools.jpg" alt="engtools">
+        <img width="30%" height="80%" src="../assets/engcalc.jpg" alt="engcalc">
         
         <div class="portfolio-card">
             <div class="portfolio-title">{{post.title}}</div>
