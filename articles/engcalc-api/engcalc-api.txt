@@ -2,11 +2,10 @@
 id: 2
 name: "engcalc-api"
 title: "Uma api para engenheiro civis"
-preview: "Neste artigo, compartilho como estou desenvolvendo uma API pública para trazer automação e integração aos cálculos estruturais na engenharia civil."
+preview: "Neste artigo, compartilho como estou desenvolvendo uma API de código aberto para trazer automação e integração aos cálculos estruturais na engenharia civil."
 date: "2025-04-10"
-tags: ["Engenharia Estrutural", "Dimensionamento", "API"]
+tags: ["Engenharia Estrutural", "Dimensionamento", "EngCalc", ".NET", "API"]
 ---
-
 
 # Criando uma API para Engenharia Civil
 
@@ -20,9 +19,11 @@ Pensando nisso, comecei a desenvolver uma API com diversas funcionalidades volta
 
 ## O Objetivo da API
 
-A proposta central é disponibilizar uma API que ofereça funcionalidades práticas para cálculos estruturais, com foco inicial no dimensionamento de vigas submetidas a esforços de cortante, flexão e torção.
+A proposta central é construir com a comunidade da AEC (Architecture, Engineering, and Construction) uma API que ofereça funcionalidades práticas para cálculos de elementos estruturais e calculadoras de apoio. Esses tipos de cálculo são essenciais tanto em contextos acadêmicos quanto na prática profissional. A API permite integrá-los facilmente em sistemas de cálculo, planilhas automatizadas, aplicativos móveis ou qualquer outro tipo de solução digital voltada à engenharia.
 
-Esses tipos de cálculo são essenciais tanto em contextos acadêmicos quanto na prática profissional. A API permite integrá-los facilmente em sistemas de cálculo, planilhas automatizadas, aplicativos móveis ou qualquer outro tipo de solução digital voltada à engenharia.
+Para o profissional de AEC que gosta de programação e tem interesse em contribuir, a API possui [código aberto](https://github.com/) e está aberta para ajuda na implementação de novas funções.
+
+Atualmente, já foi implementado o dimensionamento de vigas submetidas a esforços de cortante, flexão e torção, além do cálculo de materiais como aço e concreto. Outras funcionalidades serão implementadas, como elementos metálicos, alvenaria estrutural e outros. Sinta-se a vontade para clonar, implementar, criar fork ou contribuir com a ferramenta.
 
 ## Exemplo de Aplicação
 
