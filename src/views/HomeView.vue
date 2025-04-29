@@ -1,10 +1,11 @@
-<script setup>
+<script setup lang="ts">
 
-import { onBeforeMount, onMounted,ref } from 'vue';
+import { inject, onMounted,ref } from 'vue';
 
-function goToAbout() {
-    this.$router.push('/about')
-}
+import {GlobalStateValues,Language} from '@/store/globalState'
+
+const state = inject<GlobalStateValues>('globalState')
+
 
 const displayedText = ref("");
 
@@ -49,8 +50,8 @@ const type = () => {
     
     <div class="container">
         <div class="mainContent">
-            <h1>Developer</h1>
-            <h2>Civil Engineer</h2>
+            <h1>{{state?.language == Language.ENG ? 'Software' : 'Engenheiro'}}</h1>
+            <h2>{{state?.language == Language.ENG ? 'Engineer' : 'Software'}}</h2>
             <div class="typing-effect">{{ displayedText }}</div>
         </div>
         
