@@ -3,7 +3,7 @@ id: 3
 name: "engcalc-com-mcp-server"
 title: "Integrando EngCalc + AI com MCP"
 preview: "Neste artigo, mostro como conectar a API do EngCalc ao Claude AI usando o protocolo MCP, integrando cálculos estruturais com inteligência artificial."
-date: "2025-05*15"
+date: "2025-05-15"
 tags: ["AI", "MCP", "EngCalc", ".NET", "MCP Server"]
 ---
 
