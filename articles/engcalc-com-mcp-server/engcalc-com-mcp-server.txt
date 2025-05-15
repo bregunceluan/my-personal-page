@@ -1,0 +1,192 @@
+---
+id: 3
+name: "engcalc-com-mcp-server"
+title: "Integrando EngCalc + AI com MCP"
+preview: "Neste artigo, mostro como conectar a API do EngCalc ao Claude AI usando o protocolo MCP, integrando cálculos estruturais com inteligência artificial."
+date: "2025-05*15"
+tags: ["AI", "MCP", "EngCalc", ".NET", "MCP Server"]
+---
+
+# Integrando EngCalc + AI com MCP
+
+Com certeza você já deve ter ouvido falar sobre MCP. Mas este, pelo menos para mim, está se tornando um daqueles termos que escutamos muitas vezes, mas não sabemos explicar de fato o que é.
+Então, creio que valha uma rápida definição.
+
+## O que são MCPs?
+
+MCP (Model Context Protocol) é um protocolo aberto idealizado pela **Anthropic** (startup que criou o Claude). O objetivo é criar um padrão para que aplicativos forneçam contexto e informações para uma LLM (Large Language Model).
+
+No próprio site do MCP encontramos uma ótima analogia para explicá-lo: pense em uma porta USB-C. Assim como ela fornece um padrão para que vários dispositivos e periféricos possam se conectar, o **Model Context Protocol (MCP)** fornece uma maneira padronizada de conectar modelos de IA com softwares, APIs, fontes de dados e outros sistemas.
+
+👉 [Leia mais aqui](https://modelcontextprotocol.io/introduction)
+
+## O que foi implementado?
+
+Se os MCPs fornecem contexto para um modelo de IA, podemos usar a API do **EngCalc** para fornecer um contexto sobre como dimensionar vigas?
+
+**Sim!** Foi exatamente isso que implementei.
+
+Para que essa funcionalidade possa ser usada pelo MCP Server (no caso, o que criei neste [projeto no GitHub](https://github.com/bregunceluan/EngCalc)), é necessário criar uma **Tool** no MCP. As [Tools](https://modelcontextprotocol.io/docs/concepts/tools) permitem que os servidores exponham funcionalidades que o cliente (Claude AI) possa executar.
+
+Na Tool criada, fornecemos uma descrição da função, bem como uma explicação detalhada de cada parâmetro de entrada.
+
+Veja o exemplo abaixo:
+
+```csharp
+[McpServerToolType]
+public static class EngCalcTools
+{
+
+    [McpServerTool, Description("Dimensiona uma viga de concreto de acordo com a norma brasileira NBR-6118")]
+    public static async Task<string> DimensionaVigaDeConcreto(
+
+        EngcalcApiClient engcalcClient,
+
+        [Description("Define o esforço solicitante de calculo ao qual a viga está submetida, sendo, " +
+        "V(Esforço Cortante em kN), M(Esforço flexor em kN.m), T(Esforço Torsor kn.M)")] Solicitacao solicitacao,
+
+        [Description("Define o aço utilizado na viga, sendo Fyk(Esforço de escoamento do aço em MPa)")] Aco aco,
+
+        [Description("Define o concreto utilizado na viga, sendo Fck(Esforço de compressão do concreto em MPa)")] Concreto concreto,
+
+        [Description("Define a geometria da viga, sendo dLinha(Altura útil da viga em cm), Comprimento(Comprimento da viga em cm)," +
+        " Base(Largura da viga em cm), Altura(Altura total da viga em cm)")] GeometriaViga geometriaViga
+        )
+    {
+
+        try
+        {
+            var request = new DimensionamentoRequest
+            {
+                Solicitacao = solicitacao,
+                Aco = aco,
+                Concreto = concreto,
+                GeometriaViga = geometriaViga
+            };
+
+            var response = await engcalcClient.GetDimensionamentoAsync(request);
+
+            var content = JsonSerializer.Serialize(response);
+
+            return content;
+        }
+        catch (Exception)
+        {
+            return "Erro ao processar a solicitação.";
+        }
+
+    }
+
+}
+```
+
+## Beleza, mas me mostre um exemplo prático
+
+Suponha que você queira encontrar a **altura mínima** para uma viga submetida a determinados esforços, limitando área de aço a um valor X cm².
+
+Você pode escrever um prompt como:
+
+```
+Para uma viga submetida às seguintes solicitações:
+- Momento fletor: 5.6 kN·m  
+- Momento torsor: 2.3 kN·m
+
+Com os seguintes materiais:
+- Aço: 500 MPa  
+- Concreto: 35 MPa
+
+Calcule a altura necessária para essa viga, sabendo que ela pode ter no máximo 60 cm de altura e que a área de aço não deve ultrapassar 8 cm².
+```
+
+> ![FOTO/IMAGE DO PROMPT](https://raw.githubusercontent.com/bregunceluan/my-personal-page/refs/heads/main/articles/engcalc-com-mcp-server/prompt.jpg)
+
+
+O modelo usará o MCP Server para chamar a funcionalidade implementada, que faz uma chamada à API do EngCalc. Com os resultados, o modelo poderá ajustar parâmetros, como a altura, até chegar a uma solução.
+
+Você também pode modificar o prompt, deixando que o modelo altere a resistência do concreto, buscando a opção mais econômica possível:
+
+```
+Para uma viga submetida às seguintes solicitações:
+- Momento fletor: 15.6 kN·m  
+- Momento torsor: 4 kN·m
+
+Com os seguintes materiais:
+- Aço: 500 MPa
+
+Calcule a altura necessária para essa viga, sabendo que ela pode ter no máximo 60 cm de altura.  
+Seu objetivo é ser o mais econômico possível.
+```
+
+Recomendo experimentar diferentes prompts e observar os resultados. Porém, claro, **seja criterioso** e **avalie criticamente as respostas do modelo**.
+
+## Ok, ok... mas posso testar sem gastar com tokens ou assinaturas?
+
+Pode sim! Siga o passo a passo abaixo:
+
+### Requisitos
+
+* [.NET 8.0](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
+* [Claude Desktop](https://claude.ai/download)
+
+*(É possível utilizar outros modelos e clientes, mas este exemplo usa Claude AI)*
+
+### Passo a passo
+
+1. Instale o **Claude Desktop** e vá em:
+
+   ```
+   Menu > Arquivo > Configurações
+   ```
+
+> ![FOTO/IMAGE DOS SETTINGS](https://raw.githubusercontent.com/bregunceluan/my-personal-page/refs/heads/main/articles/engcalc-com-mcp-server/settings.jpg)
+
+
+2. Clique em **Desenvolvedor > Editar Configuração**.
+
+   Isso abrirá uma pasta. Procure o arquivo `claude_desktop_config.json`.
+
+3. Clone o repositório:
+
+   ```bash
+   git clone https://github.com/bregunceluan/EngCalc
+   ```
+
+4. Navegue até a pasta do servidor MCP:
+
+   ```bash
+   cd src/engcalc.mcp.server
+   ```
+
+5. Faça o build do projeto:
+
+   ```bash
+   dotnet build
+   ```
+
+6. Edite o `claude_desktop_config.json`, configurando o caminho do executável `engcalc.mcp.server.exe`. Exemplo:
+
+   ```json
+   {
+     "mcpServers": {
+       "EngCalcMCPServer": {
+         "command": "C:\\Users\\seu_usuário\\source\\repos\\engcalc\\src\\engcalc.mcp.server\\bin\\Debug\\net8.0\\engcalc.mcp.server.exe",
+         "args": [],
+         "type": "stdio"
+       }
+     }
+   }
+   ```
+
+7. Reinicie o **Claude Desktop**. Caso continue rodando em segundo plano, feche-o também nos ícones ocultos próximos ao relógio do Windows.
+
+Feito isso, o MCP Server estará integrado ao seu Claude Desktop, pronto para receber seus prompts.
+
+👉 Caso tenha dúvidas, siga também este [tutorial oficial do MCP](https://modelcontextprotocol.io/quickstart/user).
+
+---
+
+## Conclusão
+
+A integração entre o **EngCalc** e o modelo de IA **Claude** via **MCP** permite utilizar cálculos estruturais em tempo real como contexto para decisões inteligentes e iterativas feitas pela IA.
+
+Brinque com os prompts, explore limites e, principalmente, use de forma responsável e com verificação técnica!
