@@ -13,20 +13,32 @@ onBeforeMount(async () => {
     debugger
     const dirPosts = await getBlogPostFolders();
     
-    if(dirPosts){      
+    if(dirPosts){   
+        
+        let lastBlogPost : BlogPostData|null;
+        
         dirPosts.forEach(async(dir) =>{
-
+            
             let postContent = await getBlogPostText(dir.name)
             
             let parsed = parseHeaderAndContent(postContent);
-            blogPosts.value.push(parsed)
-            state?.blogPosts.push(parsed);
+            
+            if(parsed.date < lastBlogPost?.date){
+                blogPosts.value.push(parsed)
+                state?.blogPosts.push(parsed);               
+            }
+            else{
+                blogPosts.value.unshift(parsed)
+                state?.blogPosts.unshift(parsed);
+            }
+            lastBlogPost = parsed;
         })
+        
     }
     
 })
 
-    
+
 </script>
 
 
