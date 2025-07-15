@@ -15,7 +15,7 @@ O perigo está à espreita a todo momento. A cada segundo, softwares e computado
 
 Ciente desses fatos e guiado pela curiosidade, resolvi aprofundar um pouco mais nesse tema e implementar um sistema de segurança para minha máquina virtual (VPS).
 
-> ![FOTO/FULLVIEW](https://raw.githubusercontent.com/bregunceluan/my-personal-page/refs/heads/main/articles/you-shall-not-pass/youshallnotpass_fullview.jpg.jpg)
+> ![FOTO/FULLVIEW](https://raw.githubusercontent.com/bregunceluan/my-personal-page/refs/heads/main/articles/you-shall-not-pass/youshallnotpass_fullview.jpg)
 
 ## VPS
 
