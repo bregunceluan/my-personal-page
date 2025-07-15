@@ -7,3 +7,104 @@ date: "2025-07-17"
 tags: ["Linux", "C#", "Cybersecurity", "Scripting"]
 ---
 
+Nesse artigo explico como a leitura de um post no Reddit me instigou a investigar e notar ataques hackers que minha VPS estava sofrendo, e como criei um sistema para persistir e exibir os dados desses ataques.
+
+Você com certeza já escutou a máxima “A internet é um local perigoso”, e de fato é. Porém, no uso diário e com a ausência de ameaças reais aparentes, é fácil esquecermos desse fato.
+
+O perigo está à espreita a todo momento. A cada segundo, softwares e computadores do mundo inteiro sofrem ataques hackers das mais diversas maneiras possíveis. Engenharia social, phishing, ransomware e spywares são apenas alguns exemplos de ataques amplamente conhecidos hoje em dia. Além disso, novas ameaças e vulnerabilidades surgem com o advento e a popularização das IAs.
+
+Ciente desses fatos e guiado pela curiosidade, resolvi aprofundar um pouco mais nesse tema e implementar um sistema de segurança para minha máquina virtual (VPS).
+
+-----
+
+## VPS
+
+Obter uma máquina virtual é uma maneira divertida de colocar seus projetos online. Você pode contratar esse serviço de um provedor e ter todos os seus projetos rodando em um mesmo local, de maneira segura.
+
+Através de uma assinatura mensal ou da contratação de um plano anual, você pode ter uma máquina inteira para si. No entanto, ao contrário de serviços de nuvem especializados como AWS S3, Google Firebase, Azure Blob Storage, Vercel e outros, na VPS você precisa se preocupar desde a segurança até como servir cada aplicação, por exemplo.
+
+É um convite ao aprendizado.
+
+-----
+
+## Ataques Hackers
+
+Eu estava lendo alguns tópicos no Reddit quando me deparei com usuários relatando que, ao inspecionar os arquivos de log de autenticação SSH de suas máquinas virtuais, eles se surpreenderam com o número de tentativas de login que não reconheciam.
+
+Isso logo despertou minha curiosidade: “Será que isso está acontecendo também na minha máquina virtual?”
+
+No Linux, na distro Ubuntu, cada evento relacionado à autenticação, como tentativas de login bem ou mal-sucedidas, alterações de privilégio de usuário e outros mecanismos de autenticação, ficam salvos no arquivo */var/log/auth.log*.
+
+A resposta para minha pergunta viria com uma solução bem simples:
+
+  * Criar um bot no Telegram.
+  * Um script que lê o arquivo de logs em */var/log/auth.log*.
+  * Procura pelo termo “Password Failed”.
+  * Envia o log para o Telegram usando a API do bot.
+
+Tudo isso rodando em cima do cronjob do Linux.
+
+Bem simples, uma hora de trabalho e estava tudo pronto. Mal sabia eu que meu celular começaria a não parar de receber notificações.
+
+O cronjob rodava a cada 5 minutos, e a cada mesmo período meu celular recebia notificações como:
+
+```csharp
+🚨 [VPS] SSH ALERTA: 2025-07-11T14:30:28.624137 00:00 srv123456 sshd[1234567]:
+Failed password for invalid user test from xxx.xxx.xxx. port 50650 ssh2
+```
+
+Essa VPS serve apenas meu site pessoal, portanto não possui um tráfego de dados considerável. Mas isso não importava, ela também estava recebendo ataques de força bruta (brute force attack), onde hackers tentavam diversas senhas para logar na máquina. E não apenas com senhas diferentes, usuários comuns também eram explorados, como postgres, user, admin, ftpuser e outros.
+
+Devo admitir, os miseráveis são insistentes e criativos.
+
+-----
+
+## Melhorando a Abordagem
+
+Não dava para continuar recebendo centenas de notificações. Resolvi então mudar a abordagem para:
+
+O atacante faz 3 tentativas falhas de acesso à VPS → Banir o IP do atacante → Persistir seu IP em um banco de dados juntamente com a cidade, estado e país do IP.
+
+Para me ajudar nessa missão, utilizei duas ferramentas: UFW e Fail2ban.
+
+O UFW (**Uncomplicated Firewall**) permite criar uma proteção para as portas da máquina virtual, impedindo que atacantes tenham acesso a ela.
+
+Com o comando abaixo é possível bloquear todas as conexões que entram e permitir todas as conexões que saem:
+
+```csharp
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+```
+
+Caso seja necessário permitir alguma porta específica, basta um `ufw allow [porta]`.
+
+Rodando o nmap para verificar as portas que estão acessíveis:
+> ![FOTO/IMAGE DO PROMPT](https://raw.githubusercontent.com/bregunceluan/my-personal-page/refs/heads/main/articles/you-shall-not-pass/nmap.jpg)
+
+Feito, agora todas as portas estão fechadas. Menos um vetor de ataque.
+
+O **Fail2ban** é um software de código aberto que oferece diversas funções para proteção de servidores contra ataques de força bruta. Ele escaneia arquivos de logs como o */var/log/auth.log* e bane IPs que estão fazendo tentativas falhas de conexão. Ele faz isso atualizando em tempo real as regras do firewall do Linux.
+
+Com esse software é possível adicionar regras para que, a cada X números de tentativas falhas, o IP do usuário seja banido através da adição de uma nova regra ao Iptables. Algumas outras customizações são possíveis com o Fail2ban, como ações desencadeadas pré e pós-banimento de um IP.
+
+Para essa aplicação, fiz uso do **Actionban**, uma ação que o Fail2ban aciona ao banir um IP. Criei então um script simples que faz uma requisição para enviar o IP banido para um endpoint da API do YouShallNotPass.
+
+-----
+
+## You Shall Not Pass
+
+Com esses vários IPs tentando acessar a VPS, surgiu-me a ideia de criar uma página que apresenta em tempo real todos os IPs banidos e suas localizações.
+
+Através de serviços como **IP2Location** e **ipinfo.io**, é possível obter dados da localização dos IPs atacantes. A localização do IP não é do usuário final, e sim do provedor de internet.
+
+O **You Shall Not Pass** é uma aplicação que expõe endpoints, em sua maioria internos, para persistir os dados dos IPs atacantes. Dessa forma, é possível disponibilizar esses dados estruturados para o frontend dessa aplicação.
+
+Caso tenha interesse em ver a aplicação em tempo real, [clique aqui](https://youshallnotpass.devluan.com/).
+
+> ![FOTO/IMAGE DO PROMPT](https://raw.githubusercontent.com/bregunceluan/my-personal-page/refs/heads/main/articles/you-shall-not-pass/youshallnotpass_api.jpg)
+
+-----
+
+## Conclusão
+
+A jornada de proteger minha VPS contra ataques cibernéticos, que começou com a simples leitura de logs e o alerta inicial de um bot no Telegram, revelou a persistência e a criatividade dos atacantes. Essa experiência não apenas reforçou a máxima de que "a internet é um local perigoso", mas também demonstrou a importância de se manter vigilante e proativo na segurança de qualquer sistema online. A implementação de ferramentas como **UFW** e **Fail2ban**, culminando na criação do **You Shall Not Pass**, transformou um problema em uma oportunidade de aprendizado e desenvolvimento de uma solução robusta. Proteger sua presença online não é um evento único, mas um processo contínuo de adaptação e aprimoramento. A segurança digital exige curiosidade, experimentação e a disposição de ir além do básico para garantir a integridade dos seus dados e sistemas.
