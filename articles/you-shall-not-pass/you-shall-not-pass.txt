@@ -1,0 +1,9 @@
+---
+id: 4
+name: "you-shall-not-pass"
+title: "Um sistema de monitoramento em tempo real de servidores a ataques de força bruta."
+preview: "Nesse artigo explico como a leitura de um post no Reddit me instigou a investigar e notar ataques hackers que minha VPS estava sofrendo, e como criei um sistema para persistir e exibir os dados desses ataques."
+date: "2025-07-17"
+tags: ["Linux", "C#", "Cybersecurity", "Scripting"]
+---
+
