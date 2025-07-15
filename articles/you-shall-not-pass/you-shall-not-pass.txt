@@ -15,7 +15,7 @@ O perigo está à espreita a todo momento. A cada segundo, softwares e computado
 
 Ciente desses fatos e guiado pela curiosidade, resolvi aprofundar um pouco mais nesse tema e implementar um sistema de segurança para minha máquina virtual (VPS).
 
------
+> ![FOTO/FULLVIEW](https://raw.githubusercontent.com/bregunceluan/my-personal-page/refs/heads/main/articles/you-shall-not-pass/youshallnotpass_fullview.jpg.jpg)
 
 ## VPS
 
@@ -24,8 +24,6 @@ Obter uma máquina virtual é uma maneira divertida de colocar seus projetos onl
 Através de uma assinatura mensal ou da contratação de um plano anual, você pode ter uma máquina inteira para si. No entanto, ao contrário de serviços de nuvem especializados como AWS S3, Google Firebase, Azure Blob Storage, Vercel e outros, na VPS você precisa se preocupar desde a segurança até como servir cada aplicação, por exemplo.
 
 É um convite ao aprendizado.
-
------
 
 ## Ataques Hackers
 
@@ -57,8 +55,6 @@ Essa VPS serve apenas meu site pessoal, portanto não possui um tráfego de dado
 
 Devo admitir, os miseráveis são insistentes e criativos.
 
------
-
 ## Melhorando a Abordagem
 
 Não dava para continuar recebendo centenas de notificações. Resolvi então mudar a abordagem para:
@@ -89,8 +85,6 @@ Com esse software é possível adicionar regras para que, a cada X números de t
 
 Para essa aplicação, fiz uso do **Actionban**, uma ação que o Fail2ban aciona ao banir um IP. Criei então um script simples que faz uma requisição para enviar o IP banido para um endpoint da API do YouShallNotPass.
 
------
-
 ## You Shall Not Pass
 
 Com esses vários IPs tentando acessar a VPS, surgiu-me a ideia de criar uma página que apresenta em tempo real todos os IPs banidos e suas localizações.
@@ -102,8 +96,6 @@ O **You Shall Not Pass** é uma aplicação que expõe endpoints, em sua maioria
 Caso tenha interesse em ver a aplicação em tempo real, [clique aqui](https://youshallnotpass.devluan.com/).
 
 > ![FOTO/IMAGE DO PROMPT](https://raw.githubusercontent.com/bregunceluan/my-personal-page/refs/heads/main/articles/you-shall-not-pass/youshallnotpass_api.jpg)
-
------
 
 ## Conclusão
 
