@@ -2,6 +2,8 @@
 import PortfolioCard from '@/components/PortfolioCard.vue';
 import { computed, onBeforeMount } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import engcalcThumb from "@/assets/engcalc.jpg";
+import ysnpThumb from "@/assets/youshallnotpass.jpg";
 
 const router = useRouter()
 const route = useRoute()
@@ -18,8 +20,19 @@ const portfolioPosts = [
     link:"https://engcalc-api.devluan.com/",
     descriptionPT: "A API do EngCalc foi desenvolvida para apoiar engenheiros civis na automação de cálculos estruturais, como o dimensionamento de vigas submetidas a flexão, esforço cortante e torção.",
     descriptionENG: "The EngCalc API was developed to support civil engineers in automating structural calculations, such as the design of beams subjected to bending, shear, and torsion.",
-    tecnologies:["C#","Vue.Js", "Rest API"] 
+    tecnologies:["C#","Vue.Js", "Rest API"],
+    thumb:engcalcThumb,
+    alt:"engcal"
 },
+{
+    title: "You Shall Not Pass",
+    link: "https://youshallnotpass.devluan.com/",
+    descriptionPT: "O You Shall Not Pass é uma aplicação que monitora e exibe em tempo real IPs banidos de tentativas de ataque a servidores, como máquinas virtuais (VPS). Ele registra a localização geográfica dos atacantes, proporcionando uma visão clara das ameaças cibernéticas.",
+    descriptionENG: "You Shall Not Pass is an application that monitors and displays in real-time IPs banned from server attack attempts, such as virtual private servers (VPS). It records the geographical location of attackers, providing a clear view of cyber threats.",
+    tecnologies: ["Linux", "C#", "Cybersecurity", "Scripting"],
+    thumb:ysnpThumb,
+    alt:"youshallnotpass"
+}
 ];
 
 </script>
